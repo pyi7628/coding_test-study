@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <math.h>
 
 using namespace std;
 
