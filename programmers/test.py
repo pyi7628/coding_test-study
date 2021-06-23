@@ -1,5 +1,2 @@
-a = "\"The approach is pedagogical and \"bottom up,\" which means starting with examples and extracting more general principles from that experience.\""
-print(len(a))
-for s in a:
-    if '\"' == s:
-        print("!!")
+def solution(s):
+    return int(s.replace('one', '1').replace('two', '2').replace('three', '3').replace('four', '4').replace('five', '5').replace('six', '6').replace('seven', '7').replace('eight', '8').replace('nine', '9').replace('zero', '0'))
