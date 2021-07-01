@@ -1,5 +1,6 @@
 const test = () => {
-    console.log("test")
+    if([null]) console.log("!!")
+    // console.log({})
 }
 
 test();
