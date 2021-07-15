@@ -49,7 +49,7 @@ void update(int node, int s, int e, int idx, int v)
     {
         update(node * 2, s, (s + e) / 2, idx, v);
         update(node * 2 + 1, (s + e) / 2 + 1, e, idx, v);
-        tr[node] = tr[node * 2] + tr[node * 2 + 1];
+        tr[node] = tr[node * 2] + tr[node * 2 + 1]; // 자손들 업데이트 하고 자신도 업데이트!
     }
 }
 int main()
