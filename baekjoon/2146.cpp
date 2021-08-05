@@ -13,39 +13,43 @@ int answer = 100000;
 int cur_num = 0;
 queue<pii> q;
 
-void dfs(int row, int col, int cur_num, int from_num, int flag, int cnt)
-{
-    printf("flag: %d, cur_num: %d, from_num: %d, cnt: %d, answer: %d\n", flag, cur_num, from_num, cnt, answer);
-    if (answer <= cnt)
-        return;
+// void dfs(int row, int col, int cur_num, int from_num, int flag, int cnt)
+// {
+//     printf("flag: %d, cur_num: %d, from_num: %d, cnt: %d, answer: %d\n", flag, cur_num, from_num, cnt, answer);
+//     if (answer <= cnt)
+//         return;
 
-    for (int k = 0; k < 4; k++)
-    {
-        if (dir[k][0] + row >= 0 && dir[k][1] + col >= 0 && dir[k][0] + row < n && dir[k][1] + col < n && check[dir[k][0] + row][dir[k][1] + col] == false)
-        {
-            int next_flag = flag;
-            int next_from_num = from_num;
-            if (flag == 0 && cur_num == 0 && map[dir[k][0] + row][dir[k][1] + col] != 0)
-            {
-                next_from_num = map[dir[k][0] + row][dir[k][1] + col];
-            }
-            if (flag == 0 && cur_num != 0 && map[dir[k][0] + row][dir[k][1] + col] == 0)
-            {
-                next_flag = 1;
-                next_from_num = cur_num;
-            }
-            if (flag == 1 && cur_num == 0 && map[dir[k][0] + row][dir[k][1] + col] != 0)
-            {
-                next_flag = 0;
-                next_from_num = map[dir[k][0] + row][dir[k][1] + col];
-                if (from_num != map[dir[k][0] + row][dir[k][1] + col] && answer > cnt + 1)
-                    answer = cnt + 1;
-            }
-            check[dir[k][0] + row][dir[k][1] + col] = true;
-            dfs(dir[k][0] + row, dir[k][1] + col, next_from_num, map[dir[k][0] + row][dir[k][1] + col], next_flag, cnt + next_flag);
-            check[dir[k][0] + row][dir[k][1] + col] = false;
-        }
-    }
+//     for (int k = 0; k < 4; k++)
+//     {
+//         if (dir[k][0] + row >= 0 && dir[k][1] + col >= 0 && dir[k][0] + row < n && dir[k][1] + col < n && check[dir[k][0] + row][dir[k][1] + col] == false)
+//         {
+//             int next_flag = flag;
+//             int next_from_num = from_num;
+//             if (flag == 0 && cur_num == 0 && map[dir[k][0] + row][dir[k][1] + col] != 0)
+//             {
+//                 next_from_num = map[dir[k][0] + row][dir[k][1] + col];
+//             }
+//             if (flag == 0 && cur_num != 0 && map[dir[k][0] + row][dir[k][1] + col] == 0)
+//             {
+//                 next_flag = 1;
+//                 next_from_num = cur_num;
+//             }
+//             if (flag == 1 && cur_num == 0 && map[dir[k][0] + row][dir[k][1] + col] != 0)
+//             {
+//                 next_flag = 0;
+//                 next_from_num = map[dir[k][0] + row][dir[k][1] + col];
+//                 if (from_num != map[dir[k][0] + row][dir[k][1] + col] && answer > cnt + 1)
+//                     answer = cnt + 1;
+//             }
+//             check[dir[k][0] + row][dir[k][1] + col] = true;
+//             dfs(dir[k][0] + row, dir[k][1] + col, next_from_num, map[dir[k][0] + row][dir[k][1] + col], next_flag, cnt + next_flag);
+//             check[dir[k][0] + row][dir[k][1] + col] = false;
+//         }
+//     }
+// }
+
+void find_bridge()
+{
 }
 int main()
 {
@@ -87,7 +91,7 @@ int main()
         }
     }
 
-    dfs(0, 0, map[0][0], 0, 0, 0);
+    // dfs(0, 0, map[0][0], 0, 0, 0);
     printf("%d", answer);
     return 0;
 }
