@@ -35,14 +35,9 @@ int get_priority(char c)
 }
 bool check_priority(char c)
 {
-    if (priority > opv.back().priority)
-        return true;
-    else if (priority == opv.back().priority && get_priority(c) > get_priority(opv.back().op))
-        return true;
-    else
-        return false;
+    return priority > opv.back().priority || (priority == opv.back().priority && get_priority(c) > get_priority(opv.back().op));
 }
-void printing(char c)
+void check_printing(char c)
 {
     for (int j = 0; j < opdv.size(); j++)
     {
@@ -69,7 +64,7 @@ int main()
             temp.priority = priority;
             if (!opv.empty() && !check_priority(str[i]))
             {
-                printing(str[i]);
+                check_printing(str[i]);
             }
             opv.push_back(temp);
         }
@@ -85,16 +80,6 @@ int main()
             opdv.push_back(temp);
         }
     }
-    for (int j = 0; j < opdv.size(); j++)
-    {
-        printf("%c", opdv[j].opd);
-    }
-    opdv.clear();
-
-    while (!opv.empty())
-    {
-        printf("%c", opv.back().op);
-        opv.pop_back();
-    }
+    check_printing('+');
     return 0;
 }
