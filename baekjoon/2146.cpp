@@ -1,6 +1,7 @@
+/ 다시 풀어야함
 #include <cstdio>
 #include <queue>
-using namespace std;
+    using namespace std;
 typedef pair<int, int> pii;
 int dir[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 int init_cnt = 1;
