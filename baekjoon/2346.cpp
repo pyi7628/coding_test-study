@@ -13,9 +13,10 @@ int main()
         scanf("%d", &num);
         v.push_back(num);
     }
-    int rotate = v[0];
+
     int ptr = 0;
-    check[0] = true;
+    int rotate = v[ptr];
+    check[ptr] = true;
     printf("1 ");
 
     for (int i = 1; i < n; i++)
