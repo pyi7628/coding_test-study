@@ -6,7 +6,7 @@ int n, m;
 vector<int> v;
 vector<int> nums;
 bool check[10];
-void dfs(int cnt)
+void back_tracking(int cnt)
 {
     if (cnt == m)
     {
@@ -23,7 +23,7 @@ void dfs(int cnt)
         {
             v.push_back(nums[i - 1]);
             check[i] = true;
-            dfs(cnt + 1);
+            back_tracking(cnt + 1);
             check[i] = false;
             v.pop_back();
         }
@@ -39,6 +39,6 @@ int main()
         nums.push_back(num);
     }
     sort(nums.begin(), nums.end());
-    dfs(0);
+    back_tracking(0);
     return 0;
 }

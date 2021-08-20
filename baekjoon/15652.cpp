@@ -3,7 +3,7 @@
 using namespace std;
 int n, m;
 vector<int> v;
-void dfs(int prev, int cnt)
+void back_tracking(int prev, int cnt)
 {
     if (cnt == m)
     {
@@ -18,13 +18,13 @@ void dfs(int prev, int cnt)
     for (; i <= n; i++)
     {
         v.push_back(i);
-        dfs(i, cnt + 1);
+        back_tracking(i, cnt + 1);
         v.pop_back();
     }
 }
 int main()
 {
     scanf("%d%d", &n, &m);
-    dfs(1, 0);
+    back_tracking(1, 0);
     return 0;
 }

@@ -4,7 +4,7 @@ using namespace std;
 int n, m;
 vector<int> v;
 bool check[10];
-void dfs(int cnt)
+void back_tracking(int cnt)
 {
     if (cnt == m)
     {
@@ -21,7 +21,7 @@ void dfs(int cnt)
         {
             v.push_back(i);
             check[i] = true;
-            dfs(cnt + 1);
+            back_tracking(cnt + 1);
             check[i] = false;
             v.pop_back();
         }
@@ -30,6 +30,6 @@ void dfs(int cnt)
 int main()
 {
     scanf("%d%d", &n, &m);
-    dfs(0);
+    back_tracking(0);
     return 0;
 }
