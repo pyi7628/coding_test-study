@@ -50,25 +50,25 @@ void check_fish(FISH fish, pii shark)
     {
         NODE cur = check_q.front();
         check_q.pop();
+
         if (cur.r == fish.r && cur.c == fish.c && cur.cnt <= min_cnt)
         {
             if (cur.cnt != min_cnt)
             {
+                //printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
                 next_target = cur;
                 min_r = cur.r;
                 min_c = cur.c;
-                min_cur_size = fish.size;
                 min_cnt = cur.cnt;
             }
             else if (next_target.r >= cur.r)
             {
-                printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
+                // printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
                 if (next_target.r != cur.r || (next_target.r == cur.r && next_target.c > cur.c))
                 {
                     next_target = cur;
                     min_r = cur.r;
                     min_c = cur.c;
-                    min_cur_size = fish.size;
                     min_cnt = cur.cnt;
                 }
             }
@@ -79,13 +79,16 @@ void check_fish(FISH fish, pii shark)
             // min_c = cur.c;
             // min_cnt = cur.cnt;
         }
-        for (int i = 0; i < 4; i++)
+        else
         {
-            if (cur.cnt + 1 < min_cnt && cur.r + dir[i][0] >= 0 && cur.r + dir[i][0] < n && cur.c + dir[i][1] >= 0 && cur.c + dir[i][1] < n && !check[cur.r + dir[i][0]][cur.c + dir[i][1]] && map[cur.r + dir[i][0]][cur.c + dir[i][1]] <= cur_size)
+            for (int i = 0; i < 4; i++)
             {
-                check[cur.r + dir[i][0]][cur.c + dir[i][1]] = true;
-                node.r = cur.r + dir[i][0], node.c = cur.c + dir[i][1], node.cnt = cur.cnt + 1;
-                check_q.push(node);
+                if (cur.cnt + 1 <= min_cnt && cur.r + dir[i][0] >= 0 && cur.r + dir[i][0] < n && cur.c + dir[i][1] >= 0 && cur.c + dir[i][1] < n && !check[cur.r + dir[i][0]][cur.c + dir[i][1]] && map[cur.r + dir[i][0]][cur.c + dir[i][1]] <= cur_size)
+                {
+                    check[cur.r + dir[i][0]][cur.c + dir[i][1]] = true;
+                    node.r = cur.r + dir[i][0], node.c = cur.c + dir[i][1], node.cnt = cur.cnt + 1;
+                    check_q.push(node);
+                }
             }
         }
     }
@@ -118,6 +121,8 @@ int main()
         q.pop();
         while (!pq.empty() && pq.top().size < cur_size)
         {
+            // if (cur_size == 5)
+            //     printf("in size(5): r: %d c: %d size: %d\n", pq.top().r, pq.top().c, pq.top().size);
             FISH cur_fish = pq.top();
             pq.pop();
             fish_temp.push(cur_fish);
@@ -131,9 +136,10 @@ int main()
             min_r = 21;
             min_c = 21;
             cur_cnt++;
+            // printf("push: next: %d %d size: %d answer: %d\n", next_target.r, next_target.c, cur_size, answer);
             if (cur_cnt == cur_size)
                 cur_size++, cur_cnt = 0;
-            printf("push: next: %d %d size: %d answer: %d\n", next_target.r, next_target.c, cur_size, answer);
+
             while (!fish_temp.empty())
             {
                 FISH cur_fish = fish_temp.front();
@@ -144,6 +150,6 @@ int main()
             q.push(make_pair(next_target.r, next_target.c));
         }
     }
-    printf("answer: %d\n", answer);
+    printf("%d", answer);
     return 0;
 }
