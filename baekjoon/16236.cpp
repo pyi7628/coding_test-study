@@ -35,7 +35,7 @@ queue<FISH> fish_temp;
 queue<NODE> check_q;
 priority_queue<FISH, vector<FISH>, compare> pq;
 int map[21][21];
-int n, min_r = 21, min_c = 21, min_cur_size = 0, cur_size = 2, cur_cnt = 0, min_cnt = 401, answer = 0;
+int n, min_r = 21, min_c = 21, cur_size = 2, cur_cnt = 0, min_cnt = 401, answer = 0;
 NODE next_target;
 NODE node;
 FISH fish_node;
@@ -55,7 +55,6 @@ void check_fish(FISH fish, pii shark)
         {
             if (cur.cnt != min_cnt)
             {
-                //printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
                 next_target = cur;
                 min_r = cur.r;
                 min_c = cur.c;
@@ -63,7 +62,6 @@ void check_fish(FISH fish, pii shark)
             }
             else if (next_target.r >= cur.r)
             {
-                // printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
                 if (next_target.r != cur.r || (next_target.r == cur.r && next_target.c > cur.c))
                 {
                     next_target = cur;
@@ -72,12 +70,6 @@ void check_fish(FISH fish, pii shark)
                     min_cnt = cur.cnt;
                 }
             }
-            // && min_r >= fish.r && min_c > fish.c
-            //   printf("test: min: %d, %d %d prev: %d %d\n", cur.cnt, cur.r, cur.c, shark.first, shark.second);
-            // next_target = cur;
-            // min_r = cur.r;
-            // min_c = cur.c;
-            // min_cnt = cur.cnt;
         }
         else
         {
@@ -105,7 +97,6 @@ int main()
             {
                 q.push(make_pair(i, j));
                 map[i][j] = 0;
-                // cur_r = i, cur_c = j;
             }
             else if (map[i][j] != 0)
             {
@@ -116,13 +107,10 @@ int main()
     }
     while (!q.empty())
     {
-
         pii cur = q.front();
         q.pop();
         while (!pq.empty() && pq.top().size < cur_size)
         {
-            // if (cur_size == 5)
-            //     printf("in size(5): r: %d c: %d size: %d\n", pq.top().r, pq.top().c, pq.top().size);
             FISH cur_fish = pq.top();
             pq.pop();
             fish_temp.push(cur_fish);
@@ -131,12 +119,10 @@ int main()
         if (min_cnt != 401)
         {
             answer += min_cnt;
-            min_cur_size = 0;
             min_cnt = 401;
             min_r = 21;
             min_c = 21;
             cur_cnt++;
-            // printf("push: next: %d %d size: %d answer: %d\n", next_target.r, next_target.c, cur_size, answer);
             if (cur_cnt == cur_size)
                 cur_size++, cur_cnt = 0;
 
