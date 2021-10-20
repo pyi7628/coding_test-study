@@ -1,7 +1,12 @@
-input_arr = [[0, 1, 1, 0], [0, 0, 1, 0], [0, 0, 0, 1], [0, 0, 0, 0]]
+import pandas as pd
+import numpy as np
+
+
+n = []
+p = []
 items = ["A", "B", "C", "D"]
-groups = ["A", "AB", "AC", "AD", "BC", "BD",
-          "CD", "ABC", "ABD", "ACD", "BCD", "ABCD"]
+groups = ["A", "AB", "AC", "BC",
+          "CD", "ABC", "ACD", "BCD", "ABCD"]
 
 
 def find_item_index(str):
@@ -20,7 +25,22 @@ def find_group_index(str):
     return -1
 
 
-def main():
+def p2(k):
+    n = k.values
+    p = []
+    for i in range(0, 4):
+        a = (n[i, 1:5])
+        b = a.tolist()
+        p.append(b)
+
+    input_arr = p
+
+    for i in range(0, 4):
+        for j in range(0, 4):
+            if input_arr[i][j] == 1:
+                input_arr[j][i] = 1
+    print("input", input_arr)
+
     q = []
     index_size = len(groups)
     output_arr = [[0] * index_size for _ in range(index_size)]
@@ -28,16 +48,13 @@ def main():
     for item in items:
         q.append(item)
 
-    # queue에 있는 group check
     while len(q) != 0:
-        cur_group = q.pop(0)  # string
+        cur_group = q.pop(0)
         cur_group_idx = find_group_index(cur_group)
 
-        # 현재 group에서 연결될 수 있는 경우 탐색, 알파벳 별로 각각 탐색
         for i in range(len(cur_group)):
             item_idx = find_item_index(cur_group[i])
 
-            # 각 알파벳에서 연결될 수 있는 경우 확인하면서 가능한 경우면 다음 group으로 추가해줌
             for j in range(len(input_arr[item_idx])):
                 temp = cur_group
                 next_group = ""
@@ -50,18 +67,12 @@ def main():
                     for v in l:
                         next_group += v
 
-                    group_idx = find_group_index(next_group)
+                group_idx = find_group_index(next_group)
 
-                    # 중복되는 경우는 걸러줌
-                    if group_idx != -1 and output_arr[cur_group_idx][group_idx] == 0:
-                        output_arr[cur_group_idx][group_idx] = 1
-                        q.append(next_group)
-                        print("make group: ", cur_group, "->", next_group)
+                if group_idx != -1 and output_arr[cur_group_idx][group_idx] == 0:
+                    output_arr[cur_group_idx][group_idx] = 1
+                    q.append(next_group)
 
-    # print(output_arr)
     for i in range(len(output_arr)):
-        print(groups[i], output_arr[i])
-
-
-if __name__ == '__main__':
-    main()
+        print(output_arr[i])
+    return output_arr
