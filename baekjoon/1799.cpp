@@ -4,7 +4,8 @@
 #include <algorithm>
 using namespace std;
 typedef pair<int, int> pii;
-int n, answer = 0;
+int n;
+int ans[2];
 int map[11][11];
 bool check[11][11];
 vector<pii> v;
@@ -19,49 +20,34 @@ bool pruning(int r, int c)
     }
     return true;
 }
-int back_tracking(int idx)
+
+void back_tracking(int idx, int cnt, int color)
 {
 
     if (idx >= n * n)
     {
-        // if (answer < cnt)
-        // {
-        //     answer = cnt;
-        //     // for (int i = 0; i < n; i++)
-        //     // {
-        //     //     for (int j = 0; j < n; j++)
-        //     //     {
-        //     //         printf("%d ", check[i][j]);
-        //     //     }
-        //     //     printf("\n");
-        //     // }
-        //     // printf("\n");
-        // }
-
-        return 0;
+        if (cnt > ans[color])
+            ans[color] = cnt;
+        return;
     }
+    int next = idx + 2; // 왜 전역으로 빼면 틀리지?
+    if (n % 2 == 0 && ((idx + 1) / n) % 2 != (idx / n) % 2)
+        next = idx + 1;
+    else if (n % 2 == 0 && ((idx + 2) / n) % 2 != ((idx + 1) / n) % 2)
+        next = idx + 3;
     int i = idx / n, j = idx % n;
-    int result = 0;
-
-    // for (; i < n; i++)
-    // {
-    //     for (; j < n; j++)
-    //     {
 
     if (pruning(i, j))
     {
         check[i][j] = true;
         v.push_back(make_pair(i, j));
-        result = max(back_tracking(idx + 2) + 1, result);
+        back_tracking(next, cnt + 1, color);
         check[i][j] = false;
         v.pop_back();
     }
-    result = max(back_tracking(idx + 2), result);
-    return result;
-    //     }
-    //     j = 0;
-    // }
+    back_tracking(next, cnt, color);
 }
+
 int main()
 {
     scanf("%d", &n);
@@ -72,8 +58,8 @@ int main()
             scanf("%d", &map[i][j]);
         }
     }
-    answer = back_tracking(0) + back_tracking(1);
-
-    printf("%d", answer);
+    back_tracking(0, 0, 0);
+    back_tracking(1, 0, 1);
+    printf("%d", ans[0] + ans[1]);
     return 0;
 }
