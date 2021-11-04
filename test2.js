@@ -1,3 +1,9 @@
-x= 1
-console.log(x)
-var x = 0;
+let A = {
+    a: "a!",
+    1: "b!"
+}
+let b = {
+    a: "a!!",
+    b: "b!!"
+}
+console.log(A)
