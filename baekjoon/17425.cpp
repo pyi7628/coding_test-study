@@ -2,20 +2,26 @@
 using namespace std;
 int t, n;
 long long answer;
-int cur_max = 0;
+int cur_max = 1;
 long long prefix_sum[1000001];
 int main()
 {
     scanf("%d", &t);
+    prefix_sum[1] = 1;
     while (t--)
     {
         answer = 0;
         scanf("%d", &n);
         if (cur_max >= n)
             answer = prefix_sum[n];
-        for (int i = 1; i <= n; i++)
+        else
         {
-            answer += (n / i) * i;
+            for (int i = cur_max; i <= n; i++)
+            {
+                if (i > cur_max)
+                    cur_max = i;
+                answer += (n / i) * i;
+            }
         }
         printf("%lld\n", answer);
     }
