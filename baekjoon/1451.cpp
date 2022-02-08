@@ -6,6 +6,8 @@ int nums[51][51];
 int sum[51][51];
 vector<int> v;
 int point[3][2];
+// 백트래킹으로 각 직사각형의 왼쪽위 끝, 오른쪽 아래 끝을 체크하는 방식? -> 시간초과 날거 같긴함
+// 
 void back_tracking(int cnt, int prev)
 {
 
