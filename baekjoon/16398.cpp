@@ -10,7 +10,8 @@ struct NODE
 };
 vector<NODE> v;
 int p[1001];
-int n, answer, num;
+int n, num;
+long long answer = 0;
 NODE temp;
 bool compare(NODE a, NODE b)
 {
@@ -50,6 +51,6 @@ int main()
             answer += cur.w;
         }
     }
-    printf("%d", answer);
+    printf("%lld", answer);
     return 0;
 }
