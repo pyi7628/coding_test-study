@@ -2,10 +2,10 @@
 #include <string>
 #include <queue>
 using namespace std;
-typedef pair<string, int> sti;
+typedef pair<string, int> psi;
 bool check[1000000][2];
 string str;
-queue<sti> q;
+queue<psi> q;
 int n, k, answer = -1;
 
 int main()
@@ -18,7 +18,7 @@ int main()
         return 0;
     }
     q.push(make_pair(str, 0));
-    sti cur;
+    psi cur;
     string next_str;
     int next_num;
     while (!q.empty())
