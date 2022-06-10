@@ -9,4 +9,4 @@ const a = {
     c: "222"
 }
 
-console.log(a.b;
+console.log(a.b);
